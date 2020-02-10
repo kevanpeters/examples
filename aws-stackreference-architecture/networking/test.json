@@ -1,0 +1,951 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2020-02-10T17:05:02.039603+02:00",
+            "magic": "a58222ac2522d6802ecc62257870938611716ed3fa8596e35355301d0223157f",
+            "version": "v1.10.0-alpha.1580419901+g89f84dc4"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "stack72",
+                "project": "networking-layer",
+                "stack": "dev"
+            }
+        },
+        "resources": [
+            {
+                "urn": "urn:pulumi:dev::networking-layer::pulumi:pulumi:Stack::networking-layer-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "appVpcId": "vpc-02ee50a705c8227d0",
+                    "appVpcPrivateSubnetIds": [
+                        "subnet-0c198d0692fd2018a",
+                        "subnet-00c8c03882d8ff460",
+                        "subnet-000815409b68fb060"
+                    ],
+                    "appVpcPublicSubnetIds": [
+                        "subnet-09cbb848a70b3970d",
+                        "subnet-0423b0b2960e86afb",
+                        "subnet-083f3ccaafe9e33bd"
+                    ],
+                    "dataVpcId": "vpc-0ad90212c34294e15",
+                    "dataVpcPrivateSubnetIds": [
+                        "subnet-0eb469a41d9beddc0",
+                        "subnet-08bb61a691947c033",
+                        "subnet-0494a7cb164432aaa"
+                    ],
+                    "dataVpcPublicSubnetIds": [
+                        "subnet-060336260c734e005",
+                        "subnet-036a3a9146cdf2b88",
+                        "subnet-050ec2d00623ab49e"
+                    ],
+                    "peeredSecurityGroupId": "sg-0c6754b62578edf81"
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0",
+                "custom": true,
+                "id": "09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "type": "pulumi:providers:aws",
+                "inputs": {
+                    "region": "us-west-2",
+                    "version": "1.21.0"
+                },
+                "outputs": {
+                    "region": "us-west-2",
+                    "version": "1.21.0"
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc::app-vpc",
+                "custom": false,
+                "type": "vpc",
+                "parent": "urn:pulumi:dev::networking-layer::pulumi:pulumi:Stack::networking-layer-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc::data-vpc",
+                "custom": false,
+                "type": "vpc",
+                "parent": "urn:pulumi:dev::networking-layer::pulumi:pulumi:Stack::networking-layer-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role",
+                "custom": true,
+                "id": "app-vpc-flow-logs-role-f310ee6",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowAssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"vpc-flow-logs.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "description": "Pulumi App VPC Flow Logs",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "app-vpc-flow-logs-role-f310ee6",
+                    "path": "/",
+                    "tags": {}
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::153052954103:role/app-vpc-flow-logs-role-f310ee6",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowAssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"vpc-flow-logs.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2020-02-08T22:44:22Z",
+                    "description": "Pulumi App VPC Flow Logs",
+                    "forceDetachPolicies": false,
+                    "id": "app-vpc-flow-logs-role-f310ee6",
+                    "maxSessionDuration": 3600,
+                    "name": "app-vpc-flow-logs-role-f310ee6",
+                    "path": "/",
+                    "tags": {},
+                    "uniqueId": "AROASHIVKXX3VC2OORNHS"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc::app-vpc-vpc",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null,
+                    "description": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role",
+                "custom": true,
+                "id": "data-vpc-flow-logs-role-9a37976",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowAssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"vpc-flow-logs.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "description": "Pulumi Data VPC Flow Logs",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "data-vpc-flow-logs-role-9a37976",
+                    "path": "/",
+                    "tags": {}
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::153052954103:role/data-vpc-flow-logs-role-9a37976",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowAssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"vpc-flow-logs.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2020-02-08T22:44:26Z",
+                    "description": "Pulumi Data VPC Flow Logs",
+                    "forceDetachPolicies": false,
+                    "id": "data-vpc-flow-logs-role-9a37976",
+                    "maxSessionDuration": 3600,
+                    "name": "data-vpc-flow-logs-role-9a37976",
+                    "path": "/",
+                    "tags": {},
+                    "uniqueId": "AROASHIVKXX3WVDFTP322"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc::data-vpc-vpc",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null,
+                    "description": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:iam/rolePolicy:RolePolicy::app-vpc-flow-log-policy",
+                "custom": true,
+                "id": "app-vpc-flow-logs-role-f310ee6:vpc-flow-logs",
+                "type": "aws:iam/rolePolicy:RolePolicy",
+                "inputs": {
+                    "__defaults": [],
+                    "name": "vpc-flow-logs",
+                    "policy": "{\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\",\"logs:DescribeLogGroups\",\"logs:DescribeLogStreams\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+                    "role": "app-vpc-flow-logs-role-f310ee6"
+                },
+                "outputs": {
+                    "id": "app-vpc-flow-logs-role-f310ee6:vpc-flow-logs",
+                    "name": "vpc-flow-logs",
+                    "policy": "{\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\",\"logs:DescribeLogGroups\",\"logs:DescribeLogStreams\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+                    "role": "app-vpc-flow-logs-role-f310ee6"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role",
+                "dependencies": [
+                    "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role"
+                ],
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "name": null,
+                    "policy": null,
+                    "role": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:cloudwatch/logGroup:LogGroup::app-vpc-vpc-flow-logs",
+                "custom": true,
+                "id": "app-vpc-vpc-flow-logs-e255b36",
+                "type": "aws:cloudwatch/logGroup:LogGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name",
+                        "retentionInDays"
+                    ],
+                    "kmsKeyId": "",
+                    "name": "app-vpc-vpc-flow-logs-e255b36",
+                    "retentionInDays": 0,
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC VPC Flow Logs",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    }
+                },
+                "outputs": {
+                    "arn": "arn:aws:logs:us-west-2:153052954103:log-group:app-vpc-vpc-flow-logs-e255b36:*",
+                    "id": "app-vpc-vpc-flow-logs-e255b36",
+                    "kmsKeyId": "",
+                    "name": "app-vpc-vpc-flow-logs-e255b36",
+                    "retentionInDays": 0,
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC VPC Flow Logs",
+                        "PulumiStack": "dev"
+                    }
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:iam/rolePolicy:RolePolicy::data-vpc-flow-log-policy",
+                "custom": true,
+                "id": "data-vpc-flow-logs-role-9a37976:vpc-flow-logs",
+                "type": "aws:iam/rolePolicy:RolePolicy",
+                "inputs": {
+                    "__defaults": [],
+                    "name": "vpc-flow-logs",
+                    "policy": "{\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\",\"logs:DescribeLogGroups\",\"logs:DescribeLogStreams\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+                    "role": "data-vpc-flow-logs-role-9a37976"
+                },
+                "outputs": {
+                    "id": "data-vpc-flow-logs-role-9a37976:vpc-flow-logs",
+                    "name": "vpc-flow-logs",
+                    "policy": "{\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\",\"logs:DescribeLogGroups\",\"logs:DescribeLogStreams\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+                    "role": "data-vpc-flow-logs-role-9a37976"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role",
+                "dependencies": [
+                    "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role"
+                ],
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "name": null,
+                    "policy": null,
+                    "role": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:cloudwatch/logGroup:LogGroup::data-vpc-vpc-flow-logs",
+                "custom": true,
+                "id": "data-vpc-vpc-flow-logs-3adc64c",
+                "type": "aws:cloudwatch/logGroup:LogGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name",
+                        "retentionInDays"
+                    ],
+                    "kmsKeyId": "",
+                    "name": "data-vpc-vpc-flow-logs-3adc64c",
+                    "retentionInDays": 0,
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC VPC Flow Logs",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    }
+                },
+                "outputs": {
+                    "arn": "arn:aws:logs:us-west-2:153052954103:log-group:data-vpc-vpc-flow-logs-3adc64c:*",
+                    "id": "data-vpc-vpc-flow-logs-3adc64c",
+                    "kmsKeyId": "",
+                    "name": "data-vpc-vpc-flow-logs-3adc64c",
+                    "retentionInDays": 0,
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC VPC Flow Logs",
+                        "PulumiStack": "dev"
+                    }
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::app-vpc-nat-1",
+                "custom": true,
+                "id": "eipalloc-0979d8d40a123bf42",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "instance": "",
+                    "networkInterface": "",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC NAT Gateway EIP 1",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "associationId": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-0979d8d40a123bf42",
+                    "instance": "",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-44-224-152-223.us-west-2.compute.amazonaws.com",
+                    "publicIp": "44.224.152.223",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC NAT Gateway EIP 1",
+                        "PulumiStack": "dev"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-private-1",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::app-vpc-public-rta-3",
+                "custom": true,
+                "id": "rtbassoc-0c0f0f8a2bcbc2f28",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-014e34baaafe1064b",
+                    "subnetId": "subnet-083f3ccaafe9e33bd"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0c0f0f8a2bcbc2f28",
+                    "routeTableId": "rtb-014e34baaafe1064b",
+                    "subnetId": "subnet-083f3ccaafe9e33bd"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::app-vpc-public-rt",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::app-vpc-public-rt"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-public-3"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::app-vpc-public-rta-1",
+                "custom": true,
+                "id": "rtbassoc-032ea8f49fd51f009",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-014e34baaafe1064b",
+                    "subnetId": "subnet-09cbb848a70b3970d"
+                },
+                "outputs": {
+                    "id": "rtbassoc-032ea8f49fd51f009",
+                    "routeTableId": "rtb-014e34baaafe1064b",
+                    "subnetId": "subnet-09cbb848a70b3970d"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::app-vpc-public-rt",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::app-vpc-public-rt"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-public-1"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::app-vpc-nat-3",
+                "custom": true,
+                "id": "eipalloc-090f04e7e98796759",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "instance": "",
+                    "networkInterface": "",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC NAT Gateway EIP 3",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "associationId": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-090f04e7e98796759",
+                    "instance": "",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-44-231-102-83.us-west-2.compute.amazonaws.com",
+                    "publicIp": "44.231.102.83",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC NAT Gateway EIP 3",
+                        "PulumiStack": "dev"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-private-3",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::app-vpc-public-rta-2",
+                "custom": true,
+                "id": "rtbassoc-0652e528393ef0ce2",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-014e34baaafe1064b",
+                    "subnetId": "subnet-0423b0b2960e86afb"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0652e528393ef0ce2",
+                    "routeTableId": "rtb-014e34baaafe1064b",
+                    "subnetId": "subnet-0423b0b2960e86afb"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::app-vpc-public-rt",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::app-vpc-public-rt"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-public-2"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::app-vpc-nat-2",
+                "custom": true,
+                "id": "eipalloc-07e8b2072d87b64ab",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "instance": "",
+                    "networkInterface": "",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC NAT Gateway EIP 2",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "associationId": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-07e8b2072d87b64ab",
+                    "instance": "",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-44-232-206-77.us-west-2.compute.amazonaws.com",
+                    "publicIp": "44.232.206.77",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi App VPC NAT Gateway EIP 2",
+                        "PulumiStack": "dev"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-private-2",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::data-vpc-nat-2",
+                "custom": true,
+                "id": "eipalloc-0012e0060acac1ad5",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "instance": "",
+                    "networkInterface": "",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC NAT Gateway EIP 2",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "associationId": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-0012e0060acac1ad5",
+                    "instance": "",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-44-232-177-199.us-west-2.compute.amazonaws.com",
+                    "publicIp": "44.232.177.199",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC NAT Gateway EIP 2",
+                        "PulumiStack": "dev"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-private-2",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:ec2/flowLog:FlowLog::app-vpc-flow-logs",
+                "custom": true,
+                "id": "fl-01708f0a0686f927b",
+                "type": "aws:ec2/flowLog:FlowLog",
+                "inputs": {
+                    "__defaults": [
+                        "logDestinationType"
+                    ],
+                    "iamRoleArn": "arn:aws:iam::153052954103:role/app-vpc-flow-logs-role-f310ee6",
+                    "logDestination": "arn:aws:logs:us-west-2:153052954103:log-group:app-vpc-vpc-flow-logs-e255b36:*",
+                    "logDestinationType": "cloud-watch-logs",
+                    "logFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+                    "logGroupName": "app-vpc-vpc-flow-logs-e255b36",
+                    "trafficType": "ALL",
+                    "vpcId": "vpc-02ee50a705c8227d0"
+                },
+                "outputs": {
+                    "iamRoleArn": "arn:aws:iam::153052954103:role/app-vpc-flow-logs-role-f310ee6",
+                    "id": "fl-01708f0a0686f927b",
+                    "logDestination": "arn:aws:logs:us-west-2:153052954103:log-group:app-vpc-vpc-flow-logs-e255b36",
+                    "logDestinationType": "cloud-watch-logs",
+                    "logFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+                    "logGroupName": "app-vpc-vpc-flow-logs-e255b36",
+                    "trafficType": "ALL",
+                    "vpcId": "vpc-02ee50a705c8227d0"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role",
+                "dependencies": [
+                    "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role",
+                    "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:cloudwatch/logGroup:LogGroup::app-vpc-vpc-flow-logs"
+                ],
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "iamRoleArn": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::app-vpc-flow-logs-role"
+                    ],
+                    "logDestination": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:cloudwatch/logGroup:LogGroup::app-vpc-vpc-flow-logs"
+                    ],
+                    "trafficType": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc::app-vpc-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::data-vpc-nat-1",
+                "custom": true,
+                "id": "eipalloc-040ef7aa8bd7ee480",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "instance": "",
+                    "networkInterface": "",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC NAT Gateway EIP 1",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "associationId": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-040ef7aa8bd7ee480",
+                    "instance": "",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-44-232-239-97.us-west-2.compute.amazonaws.com",
+                    "publicIp": "44.232.239.97",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC NAT Gateway EIP 1",
+                        "PulumiStack": "dev"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-private-1",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::data-vpc-public-rta-1",
+                "custom": true,
+                "id": "rtbassoc-0b604702da0bc0455",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-037b09c57ffc32e18",
+                    "subnetId": "subnet-060336260c734e005"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0b604702da0bc0455",
+                    "routeTableId": "rtb-037b09c57ffc32e18",
+                    "subnetId": "subnet-060336260c734e005"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::data-vpc-public-rt",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::data-vpc-public-rt"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-public-1"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::data-vpc-public-rta-3",
+                "custom": true,
+                "id": "rtbassoc-0dde9d9e3d86ac272",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-037b09c57ffc32e18",
+                    "subnetId": "subnet-050ec2d00623ab49e"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0dde9d9e3d86ac272",
+                    "routeTableId": "rtb-037b09c57ffc32e18",
+                    "subnetId": "subnet-050ec2d00623ab49e"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::data-vpc-public-rt",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::data-vpc-public-rt"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-public-3"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::data-vpc-nat-3",
+                "custom": true,
+                "id": "eipalloc-06fb1376424f29d8b",
+                "type": "aws:ec2/eip:Eip",
+                "inputs": {
+                    "__defaults": [],
+                    "instance": "",
+                    "networkInterface": "",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC NAT Gateway EIP 3",
+                        "PulumiStack": "dev",
+                        "__defaults": []
+                    },
+                    "vpc": true
+                },
+                "outputs": {
+                    "associationId": "",
+                    "domain": "vpc",
+                    "id": "eipalloc-06fb1376424f29d8b",
+                    "instance": "",
+                    "networkInterface": "",
+                    "privateIp": "",
+                    "publicDns": "ec2-44-232-141-44.us-west-2.compute.amazonaws.com",
+                    "publicIp": "44.232.141.44",
+                    "publicIpv4Pool": "amazon",
+                    "tags": {
+                        "ManagedBy": "Pulumi",
+                        "Name": "Pulumi Data VPC NAT Gateway EIP 3",
+                        "PulumiStack": "dev"
+                    },
+                    "vpc": true
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-private-3",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "tags": null,
+                    "vpc": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:ec2/flowLog:FlowLog::data-vpc-flow-logs",
+                "custom": true,
+                "id": "fl-01954897d792eba1a",
+                "type": "aws:ec2/flowLog:FlowLog",
+                "inputs": {
+                    "__defaults": [
+                        "logDestinationType"
+                    ],
+                    "iamRoleArn": "arn:aws:iam::153052954103:role/data-vpc-flow-logs-role-9a37976",
+                    "logDestination": "arn:aws:logs:us-west-2:153052954103:log-group:data-vpc-vpc-flow-logs-3adc64c:*",
+                    "logDestinationType": "cloud-watch-logs",
+                    "logFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+                    "logGroupName": "data-vpc-vpc-flow-logs-3adc64c",
+                    "trafficType": "ALL",
+                    "vpcId": "vpc-0ad90212c34294e15"
+                },
+                "outputs": {
+                    "iamRoleArn": "arn:aws:iam::153052954103:role/data-vpc-flow-logs-role-9a37976",
+                    "id": "fl-01954897d792eba1a",
+                    "logDestination": "arn:aws:logs:us-west-2:153052954103:log-group:data-vpc-vpc-flow-logs-3adc64c",
+                    "logDestinationType": "cloud-watch-logs",
+                    "logFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+                    "logGroupName": "data-vpc-vpc-flow-logs-3adc64c",
+                    "trafficType": "ALL",
+                    "vpcId": "vpc-0ad90212c34294e15"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role",
+                "dependencies": [
+                    "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role",
+                    "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:cloudwatch/logGroup:LogGroup::data-vpc-vpc-flow-logs"
+                ],
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "iamRoleArn": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role::data-vpc-flow-logs-role"
+                    ],
+                    "logDestination": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:iam/role:Role$aws:cloudwatch/logGroup:LogGroup::data-vpc-vpc-flow-logs"
+                    ],
+                    "trafficType": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc::data-vpc-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::data-vpc-public-rta-2",
+                "custom": true,
+                "id": "rtbassoc-00f393e55a2420b91",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-037b09c57ffc32e18",
+                    "subnetId": "subnet-036a3a9146cdf2b88"
+                },
+                "outputs": {
+                    "id": "rtbassoc-00f393e55a2420b91",
+                    "routeTableId": "rtb-037b09c57ffc32e18",
+                    "subnetId": "subnet-036a3a9146cdf2b88"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::data-vpc-public-rt",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/defaultRouteTable:DefaultRouteTable::data-vpc-public-rt"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-public-2"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::app-vpc-private-rta-1",
+                "custom": true,
+                "id": "rtbassoc-0204ca96c128a5595",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-07cb8bd5861c118cf",
+                    "subnetId": "subnet-0c198d0692fd2018a"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0204ca96c128a5595",
+                    "routeTableId": "rtb-07cb8bd5861c118cf",
+                    "subnetId": "subnet-0c198d0692fd2018a"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::app-vpc-private-rt-1",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::app-vpc-private-rt-1"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-private-1"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::app-vpc-private-rta-2",
+                "custom": true,
+                "id": "rtbassoc-056d7b7be2be2bc06",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-0c415cf2b9e5f0a1a",
+                    "subnetId": "subnet-00c8c03882d8ff460"
+                },
+                "outputs": {
+                    "id": "rtbassoc-056d7b7be2be2bc06",
+                    "routeTableId": "rtb-0c415cf2b9e5f0a1a",
+                    "subnetId": "subnet-00c8c03882d8ff460"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::app-vpc-private-rt-2",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::app-vpc-private-rt-2"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-private-2"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::app-vpc-private-rta-3",
+                "custom": true,
+                "id": "rtbassoc-042087cfd80d19705",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-07b9fd3dd5d691353",
+                    "subnetId": "subnet-000815409b68fb060"
+                },
+                "outputs": {
+                    "id": "rtbassoc-042087cfd80d19705",
+                    "routeTableId": "rtb-07b9fd3dd5d691353",
+                    "subnetId": "subnet-000815409b68fb060"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::app-vpc-private-rt-3",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::app-vpc-private-rt-3"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::app-vpc-private-3"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::data-vpc-private-rta-2",
+                "custom": true,
+                "id": "rtbassoc-0db5d78f13a284299",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-0f8ffa0db57728102",
+                    "subnetId": "subnet-08bb61a691947c033"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0db5d78f13a284299",
+                    "routeTableId": "rtb-0f8ffa0db57728102",
+                    "subnetId": "subnet-08bb61a691947c033"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::data-vpc-private-rt-2",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::data-vpc-private-rt-2"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-private-2"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::data-vpc-private-rta-1",
+                "custom": true,
+                "id": "rtbassoc-04e6b90de560aebd9",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-084a86eedddf809cb",
+                    "subnetId": "subnet-0eb469a41d9beddc0"
+                },
+                "outputs": {
+                    "id": "rtbassoc-04e6b90de560aebd9",
+                    "routeTableId": "rtb-084a86eedddf809cb",
+                    "subnetId": "subnet-0eb469a41d9beddc0"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::data-vpc-private-rt-1",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::data-vpc-private-rt-1"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-private-1"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::data-vpc-private-rta-3",
+                "custom": true,
+                "id": "rtbassoc-0941397c2a8ba082f",
+                "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                "inputs": {
+                    "__defaults": [],
+                    "routeTableId": "rtb-02e025af7b03804e0",
+                    "subnetId": "subnet-0494a7cb164432aaa"
+                },
+                "outputs": {
+                    "id": "rtbassoc-0941397c2a8ba082f",
+                    "routeTableId": "rtb-02e025af7b03804e0",
+                    "subnetId": "subnet-0494a7cb164432aaa"
+                },
+                "parent": "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::data-vpc-private-rt-3",
+                "provider": "urn:pulumi:dev::networking-layer::pulumi:providers:aws::default_1_21_0::09c12cd6-3541-4ed2-b0fe-27a11795f23c",
+                "propertyDependencies": {
+                    "routeTableId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::data-vpc-private-rt-3"
+                    ],
+                    "subnetId": [
+                        "urn:pulumi:dev::networking-layer::vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::data-vpc-private-3"
+                    ]
+                }
+            }
+        ],
+        "pending_operations": [
+        ]
+    }
+}
